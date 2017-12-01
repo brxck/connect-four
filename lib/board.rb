@@ -20,4 +20,14 @@ class Board
       end
     end
   end
+
+  def column_check
+    @spaces.each do |column|
+      (0..2).each do |i|
+        sum = column[i..i + 3].reduce(:+)
+        return sum if [4, -4].include?(sum)
+      end
+    end
+    nil
+  end
 end

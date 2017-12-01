@@ -48,9 +48,8 @@ describe Board do
     it "returns the location of the placed piece" do
       3.times { answer << board.drop_piece(0, 1) }
       expect(answer).to eq([[0, 0], [0, 1], [0, 2]])
-
     end
-  
+
     it "does not accept columns below [0]" do
       expect(board.drop_piece(-1, 1)).to eq(nil)
     end
@@ -58,6 +57,9 @@ describe Board do
     it "does not accept columns above [6]" do
       expect(board.drop_piece(7, 1)).to eq(nil)
     end
-  
+  end
+
+  describe "win_check" do
+    
   end
 end

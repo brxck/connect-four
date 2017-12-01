@@ -15,3 +15,17 @@
       * `= -4`: player 2
   * `drop_piece(column, player)`
     * place piece at the lowest open space in the column
+
+## Board
+
+```ruby
+[[ 1,  0,  0,  0,  0,  0],
+ [-1,  0,  0,  0,  0,  0],
+ [-1,  1,  0,  0,  0,  0],
+ [ 1, -1,  0,  0,  0,  0],  <--drop
+ [ 1,  0,  0,  0,  0,  0],
+ [ 0,  0,  0,  0,  0,  0],
+ [ 0,  0,  0,  0,  0,  0]]
+```
+
+This board configuration allows easy iteration through columns to place pieces.
