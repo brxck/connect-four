@@ -76,4 +76,17 @@ describe Board do
       expect(board.row_check).to eq(-4)
     end
   end
+
+  describe "#diag_check" do
+    it "connects four across one diagonal" do
+      board.spaces == [[0, 0, 0, 0, 0, 0],
+                       [1, 0, 0, 0, 0, 0],
+                       [0, 1, 0, 0, 0, 0],
+                       [0, 0, 1, 0, 0, 0],
+                       [0, 0, 0, 1, 0, 0],
+                       [0, 0, 0, 0, 0, 0],
+                       [0, 0, 0, 0, 0, 0]]
+      expect(board.diag_check).to eq(4)
+    end
+  end
 end

@@ -41,4 +41,15 @@ class Board
       end
     end
   end
+
+  def diag_check
+    (0..5).each do |y|
+      row = []
+      (0..3).each do |x|
+        4.times { |i| row << @spaces[x + i][y] }
+        sum = row.reduce(:+)
+        return sum if [4, -4].include?(sum)
+      end
+    end
+  end
 end
