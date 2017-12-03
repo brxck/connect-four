@@ -63,30 +63,41 @@ describe Board do
     end
   end
 
-  describe "#column_check" do
+  describe "#check" do
     it "connects four vertically" do
       4.times { board.drop_piece(5, 1) }
-      expect(board.column_check).to eq(4)
+      expect(board.check).to eq(4)
     end
-  end
 
-  describe "#row_check" do
-    it "connects four horizonally" do
+    it "connects four horizontally" do
       4.times { |i| board.drop_piece(i, -1) }
-      expect(board.row_check).to eq(-4)
+      expect(board.check).to eq(-4)
     end
-  end
 
-  describe "#diag_check" do
-    it "connects four across one diagonal" do
-      board.spaces == [[0, 0, 0, 0, 0, 0],
-                       [1, 0, 0, 0, 0, 0],
-                       [0, 1, 0, 0, 0, 0],
-                       [0, 0, 1, 0, 0, 0],
-                       [0, 0, 0, 1, 0, 0],
-                       [0, 0, 0, 0, 0, 0],
-                       [0, 0, 0, 0, 0, 0]]
-      expect(board.diag_check).to eq(4)
+    it "returns nil when there is no winner" do
+      expect(board.check).to eq(nil)
+    end
+
+    it "connects four across right-diagonal" do
+      board.spaces = [[0, 0, 0, 0, 0, 0],
+                      [1, 0, 0, 0, 0, 0],
+                      [0, 1, 0, 0, 0, 0],
+                      [0, 0, 1, 0, 0, 0],
+                      [0, 0, 0, 1, 0, 0],
+                      [0, 0, 0, 0, 0, 0],
+                      [0, 0, 0, 0, 0, 0]]
+      expect(board.check).to eq(4)
+    end
+
+    it "connects four spaces across left-diagonal" do
+      board.spaces = [[0, 0, 0, 0, 0, 0],
+                      [0, 0, 0, 0, 0, 0],
+                      [0, 0, 0, 1, 0, 0],
+                      [0, 0, 1, 0, 0, 0],
+                      [0, 1, 0, 0, 0, 0],
+                      [1, 0, 0, 0, 0, 0],
+                      [0, 0, 0, 0, 0, 0]]
+      expect(board.check).to eq(4)
     end
   end
 end

@@ -21,35 +21,40 @@ class Board
     end
   end
 
-  def column_check
-    @spaces.each do |column|
-      (0..2).each do |y|
-        sum = column[y..y + 3].reduce(:+)
-        return sum if [4, -4].include?(sum)
+  def check
+    (0..6).each do |x|
+      (0..5).each do |y|
+        winner = space_check(x, y)
+        return winner if winner
       end
     end
     nil
   end
 
-  def row_check
-    (0..5).each do |y|
-      row = []
-      (0..3).each do |x|
-        4.times { |i| row << @spaces[x + i][y] }
-        sum = row.reduce(:+)
-        return sum if [4, -4].include?(sum)
-      end
-    end
-  end
+  # Sorry, not sure how to shorten this one...
+  # rubocop:disable Metrics/AbcSize
+  # rubocop:disable Metrics/MethodLength
+  def space_check(x, y, check_value = nil, count = 0, dir = nil)
+    space = @spaces[x][y]
+    return nil if space.zero? || space.nil?
 
-  def diag_check
-    (0..5).each do |y|
-      row = []
-      (0..3).each do |x|
-        4.times { |i| row << @spaces[x + i][y] }
-        sum = row.reduce(:+)
-        return sum if [4, -4].include?(sum)
-      end
+    check_value = space if check_value.nil?
+    return nil if space != check_value
+
+    count += check_value
+    return count if [4, -4].include?(count)
+
+    # We actually want to do all calls when dir = nil
+    # rubocop:disable Lint/DuplicateCaseCondition
+    case dir
+    when :column, nil
+      space_check(x + 1, y, check_value, count, :column) unless @spaces[x + 1].nil?
+    when :row, nil
+      space_check(x, y + 1, check_value, count, :row) unless @spaces[x][y + 1].nil?
+    when :rdiag, nil
+      space_check(x + 1, y + 1, check_value, count, :rdiag) unless @spaces[x][y + 1].nil?
+    when :ldiag, nil
+      space_check(x - 1, y - 1, check_value, count, :ldiag) unless @spaces[x][y + 1].nil?
     end
   end
 end
