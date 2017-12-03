@@ -57,9 +57,23 @@ describe Board do
     it "does not accept columns above [6]" do
       expect(board.drop_piece(7, 1)).to eq(nil)
     end
+
+    it "does not accept invalid players" do
+      expect(board.drop_piece(1, 58)).to eq(nil)
+    end
   end
 
-  describe "win_check" do
-    
+  describe "#column_check" do
+    it "connects four vertically" do
+      4.times { board.drop_piece(5, 1) }
+      expect(board.column_check).to eq(4)
+    end
+  end
+
+  describe "#row_check" do
+    it "connects four horizonally" do
+      4.times { |i| board.drop_piece(i, -1) }
+      expect(board.row_check).to eq(-4)
+    end
   end
 end
