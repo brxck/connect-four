@@ -92,12 +92,12 @@ describe Board do
     it "connects four spaces across left-diagonal" do
       board.spaces = [[0, 0, 0, 0, 0, 0],
                       [0, 0, 0, 0, 0, 0],
-                      [0, 0, 0, 1, 0, 0],
-                      [0, 0, 1, 0, 0, 0],
-                      [0, 1, 0, 0, 0, 0],
-                      [1, 0, 0, 0, 0, 0],
+                      [0, 0, 0, -1, 0, 0],
+                      [0, 0, -1, 0, 0, 0],
+                      [0, -1, 0, 0, 0, 0],
+                      [-1, 0, 0, 0, 0, 0],
                       [0, 0, 0, 0, 0, 0]]
-      expect(board.check).to eq(4)
+      expect(board.check).to eq(-4)
     end
   end
 end
