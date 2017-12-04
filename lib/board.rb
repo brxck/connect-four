@@ -1,5 +1,4 @@
 class Board
-
   attr_accessor :spaces
 
   def initialize
@@ -17,6 +16,10 @@ class Board
       result += row.to_s + "\n"
     end
     result
+  end
+
+  def draw
+    print inspect
   end
 
   def drop_piece(x, player)
